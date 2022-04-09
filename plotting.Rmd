@@ -1,0 +1,68 @@
+---
+title: "Visualizing our data"
+output: html_notebook
+---
+
+```{r, message = FALSE}
+library(tidyverse)
+library(plotly)
+full <- read_rds("data/artist_fnd_full.Rds")
+```
+
+
+```{r}
+student_name <- "Statsy McData"
+
+artist <- full %>% 
+  filter(artist_name %in% c("Billie Eilish"))
+
+g <- artist %>% 
+  ggplot(aes(x = valence, y = energy, colour = artist_name, text = track_name)) +
+    geom_point() +
+    scale_color_manual(values = "#5f488c") +
+    theme_minimal() +
+    ylim(0,1) +
+    xlim(0,1) +
+    geom_hline(yintercept = 0.5) +
+    geom_vline(xintercept = 0.5) +
+    xlab("Positiveness (valence)") +
+    ylab("Engergy") + 
+    labs(caption= str_c("Created by ", student_name), 
+         colour = "Artist(s)") 
+
+g 
+
+ggplotly(g, tooltip="text")
+
+ggsave(str_c("student-graphs/", student_name, ".png"), width = 8, height = 5.2, bg = "white", dpi = 300)
+
+```
+
+
+
+
+## More things you could try
+
+
+### Add more artists
+
+In the second line of code, add another artist. Make sure the spelling and capitalisation is extactly as it is in the raw data!
+
+```
+  filter(artist_name %in% c("Taylor Swift", "Bruno Mars")) %>% 
+```  
+
+### Change colours
+Try adding the following code:
+```
+# only works if you have one or three artists or fewer
+scale_color_manual(values = c("darkorchid4", "chartreuse4", "cyan2", "firebrick1"))
+```
+
+Change colours, here are some names you can tell R: http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf
+
+### Make separate plots
+Try adding the following code:
+```
+facet_wrap(~arist_name)
+```
