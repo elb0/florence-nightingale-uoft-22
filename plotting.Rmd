@@ -6,7 +6,7 @@ output: html_notebook
 ```{r, message = FALSE}
 library(tidyverse)
 library(plotly)
-full <- read_rds("data/artist_fnd_full.Rds")
+full <- read_rds("data/artist_fps_full.Rds")
 ```
 
 
