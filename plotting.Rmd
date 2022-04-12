@@ -26,7 +26,7 @@ g <- artist %>%
     geom_hline(yintercept = 0.5) +
     geom_vline(xintercept = 0.5) +
     xlab("Positiveness (valence)") +
-    ylab("Engergy") + 
+    ylab("Energy") + 
     labs(caption= str_c("Created by ", student_name), 
          colour = "Artist(s)") 
 
